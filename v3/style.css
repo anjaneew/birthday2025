@@ -1,0 +1,109 @@
+        body {
+            font-family: 'Comic Neue', cursive;
+            background-color: #ffebee;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        h1 {
+            color: #d81b60;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        #puzzle {
+            width: 90vw;
+            max-width: 400px;
+            height: 90vw;
+            max-height: 400px;
+            margin: 0 auto;
+            border: 3px solid #f48fb1;
+            border-radius: 10px;
+            background-color: #fce4ec;
+        }
+        
+        #puzzle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 1px solid #f8bbd0;
+            box-sizing: border-box;
+            cursor: move;
+            transition: transform 0.2s;
+        }
+        
+        #puzzle img:hover {
+            transform: scale(1.02);
+            z-index: 1;
+        }
+        
+        #complete-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        #complete-overlay.hidden {
+            display: none;
+        }
+        
+        #complete-image {
+            max-width: 80%;
+            max-height: 60%;
+            border: 5px solid white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        #message {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #ffeb3b;
+        }
+        
+        #progress {
+            margin-top: 250px;
+            font-size: 1.2em;
+            color: #81c784;
+        }
+        
+        #gift{
+            font-size: 2em;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f44336;
+            opacity: 0;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        

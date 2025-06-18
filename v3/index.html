@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Puzzle!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+<body>
+    <h1>Birthday Puzzle!</h1>
+    <audio controls id="music" loop src="audio/babytoymusic.wav" preload="auto"></audio>
+    <div id="puzzle"></div>
+    <div id="progress">Puzzle 1 of 10</div>
+    
+    <div id="complete-overlay" class="hidden">
+        <img id="complete-image" src="" alt="Completed Puzzle"  usemap="#workmap">
+        <div id="message">Great job! Loading next puzzle...</div>
+    </div>
+    
+    <audio id="success-sound" src="audio/success.wav" preload="auto"></audio>
+    
+
+    
+    
+    <script src="script.js"></script>
+</body>
+</html>
+
+

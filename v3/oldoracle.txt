@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oracle</title>
+    <link rel="stylesheet" href="oracle.css">
+</head>
+<body>
+    <!-- oracle -->
+    <div id="oracle-globe" class="hidden">
+    <h2>Fortune Telling Oracle</h2>
+    <div id="globe-container">
+    
+    <img id="globe" src="images/oracle/globe_dark.jpeg" alt="Mystic Globe" usemap="#workmap">
+    <map name="workmap">
+        <area shape="circle" coords="377, 262, 250" alt="oracle" href="#" onclick="glow()">
+    </map>
+
+  </div>
+  <div id="fortune-results"></div></div>
+  <script src="oracle.js"></script>
+</body>
+</html>
+
+
+/* Globe Oracle Styling */
+        #oracle-globe {
+        text-align: center;
+        margin-top: 20px;
+        }
+
+        #globe-container {
+        width: 300px;
+        height: 300px;
+        margin: 0 auto;
+        position: relative;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 0 30px rgba(123, 31, 162, 0.6);
+        }
+
+        #globe {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 1s;
+        }
+
+        #fortune-results {
+        margin-top: 20px;
+        font-size: 1.2em;
+        min-height: 100px;
+        }
+
+        /* .hidden { 
+            display: none; } */
+
+
+
+            const globe = document.getElementById("globe");
+
+
+const oracleFortunes = [
+  { 
+    image: "images/oracle/1.jpeg", 
+    text: "shopping in cobblestone streets, Paris, France\nපැරීසියේ, ප්‍රංශයේ, කොබල්ස්ටෝන් මාවතේ සාප්පු සවාරි" 
+  },
+  { 
+    image: "images/oracle/2.jpeg", 
+    text: "shopping in cobblestone streets, Paris, France\nපැරීසියේ, ප්‍රංශයේ, කොබල්ස්ටෝන් මාවතේ සාප්පු සවාරි" 
+  },
+  { 
+    image: "images/oracle/3.jpeg", 
+    text: "Amsterdam, Netherlands\nඇම්ස්ටර්ඩෑම්, නෙදර්ලන්තය" 
+  },
+  { 
+    image: "images/oracle/4.jpeg", 
+    text: "colosseum, Rome, Italy\nකොලොසියම්, රෝමය, ඉතාලිය" 
+  },
+  { 
+    image: "images/oracle/5.jpeg", 
+    text: "Park Güell in Barcelona, Spain\nස්පාඤ්ඤයේ, බාර්සලෝනාහි, පාර්ක් ගුවෙල්" 
+  },
+  { 
+    image: "images/oracle/6.jpeg", 
+    text: "Charles Bridge, Prague, Czech Republic\nචාල්ස් පාලම, ප්‍රාග්, චෙක් ජනරජය" 
+  },
+  { 
+    image: "images/oracle/7.jpeg", 
+    text: "Eiffel Tower Lawn, Paris, France\nඅයිෆල් කුළුණ, පැරීසියේ, ප්‍රංශය" 
+  },
+  { 
+    image: "images/oracle/8.jpeg", 
+    text: "Eiffel Tower Lawn, Paris, France\nඅයිෆල් කුළුණ, පැරීසියේ, ප්‍රංශය" 
+  },
+  { 
+    image: "images/oracle/9.jpeg", 
+    text: "Via Ricasoli, Florence, Italy\nවියා රිකසොලි, ෆ්ලොරන්ස්, ඉතාලිය" 
+  },
+  { 
+    image: "images/oracle/10.jpeg", 
+    text: "Neuschwanstein Castle, Germany\nනොයිශ්වාන්ස්ටයින් මාලිගය, ජර්මනිය" 
+  },
+  { 
+    image: "images/oracle/11.jpeg", 
+    text: "Piazza della Signoria, Florence, Italy\nපියාසා දැලා සිග්නෝරියා, ෆ්ලොරන්ස්, ඉතාලිය" 
+  },
+  { 
+    image: "images/oracle/12.jpeg", 
+    text: "Riga Old Town, Latvia\nරිගා පරණ නගරය, ලැට්වියාව" 
+  },
+  { 
+    image: "images/oracle/13.jpeg", 
+    text: "Sagrada Família, Barcelona, Spain\nසග්රාඩා ෆැමිලියා, බාර්සලෝනා, ස්පාඤ්ඤය" 
+  },
+  { 
+    image: "images/oracle/14.jpeg", 
+    text: "Schönbrunn Palace Gardens, Vienna, Austria\nෂෝන්බ්‍රන්  මාලිගා උයන, වීයානා, ඕස්ට්‍රියාව" 
+  },
+  { 
+    image: "images/oracle/15.jpeg", 
+    text: "St. Mark’s Square, Venice, Italy\nසෙන්ට් මාක්ස් චතුරශ්‍රය, වෙනීස්, ඉතාලිය" 
+  },
+  { 
+    image: "images/oracle/16.jpeg", 
+    text: "Swiss Alps Scenic Train Platform, Zermatt, Switzerland\nස්විස් ඇල්ප්ස්  දුම්රිය ස්ටේශම, සර්මට්, ස්විට්සර්ලන්තය" 
+  },
+  { 
+    image: "images/oracle/17.jpeg", 
+    text: "Venice, Canal Bridge, Italy\nවෙනීස්, ඇළ පාලම, ඉතාලිය" 
+  },
+  { 
+    image: "images/oracle/18.jpeg", 
+    text: "Vienna Christmas market, Austria\nවීයානා නත්තල් වෙළඳපොළ, ඕස්ට්‍රියාව" 
+  }
+];
+
+const glow = () => {
+    globe.src = "images/oracle/globe_glow.jpeg";
+}; 
+
+function showOracle() {
+  const oracleDiv = document.getElementById('oracle-globe');
+  const globe = document.getElementById('globe');
+  const resultsDiv = document.getElementById('fortune-results');
+
+  oracleDiv.classList.remove('hidden');
+  resultsDiv.innerHTML = "<p>The globe is swirling...</p>";
+
+  // Animate globe (dark → glowing)
+  globe.src = "images/oracle/globe_dark.jpg";
+  setTimeout(() => {
+    globe.src = "images/oracle/globe_glow.jpg"; // Add a 'glowing' version of your globe
+  }, 1000);
+
+  // Reveal 3 random fortunes with delays
+  setTimeout(() => revealFortune(1), 3000);
+  setTimeout(() => revealFortune(2), 6000);
+  setTimeout(() => revealFortune(3), 9000);
+}
+
+function revealFortune(sequence) {
+  const globe = document.getElementById('globe');
+  const resultsDiv = document.getElementById('fortune-results');
+  
+  // Random selection
+  const randomFortune = oracleFortunes[Math.floor(Math.random() * oracleFortunes.length)];
+  
+  // Flash effect
+  globe.style.opacity = 0;
+  setTimeout(() => {
+    globe.src = randomFortune.image;
+    globe.style.opacity = 1;
+    resultsDiv.innerHTML += `<p>${sequence}. ${randomFortune.text}</p>`;
+  }, 500);
+}
+-------------------------------
+
+        // Oracle Fortunes Data
+        const oracleFortunes = [
+            { image: "images/oracle/1.jpeg", text: "Shopping in cobblestone streets, Paris, France\nපැරීසියේ, ප්‍රංශයේ, කොබල්ස්ටෝන් මාවතේ සාප්පු සවාරි" },
+            { image: "images/oracle/2.jpeg", text: "Shopping in cobblestone streets, Paris, France\nපැරීසියේ, ප්‍රංශයේ, කොබල්ස්ටෝන් මාවතේ සාප්පු සවාරි" },
+            { image: "images/oracle/3.jpeg", text: "Amsterdam, Netherlands\nඇම්ස්ටර්ඩෑම්, නෙදර්ලන්තය" },
+            { image: "images/oracle/4.jpeg", text: "Colosseum, Rome, Italy\nකොලොසියම්, රෝමය, ඉතාලිය" },
+            { image: "images/oracle/5.jpeg", text: "Park Güell in Barcelona, Spain\nස්පාඤ්ඤයේ, බාර්සලෝනාහි, පාර්ක් ගුවෙල්" },
+            { image: "images/oracle/6.jpeg", text: "Charles Bridge, Prague, Czech Republic\nචාල්ස් පාලම, ප්‍රාග්, චෙක් ජනරජය" },
+            { image: "images/oracle/7.jpeg", text: "Eiffel Tower Lawn, Paris, France\nඅයිෆල් කුළුණ, පැරීසියේ, ප්‍රංශය" },
+            { image: "images/oracle/8.jpeg", text: "Eiffel Tower Lawn, Paris, France\nඅයිෆල් කුළුණ, පැරීසියේ, ප්‍රංශය" },
+            { image: "images/oracle/9.jpeg", text: "Via Ricasoli, Florence, Italy\nවියා රිකසොලි, ෆ්ලොරන්ස්, ඉතාලිය" },
+            { image: "images/oracle/10.jpeg", text: "Neuschwanstein Castle, Germany\nනොයිශ්වාන්ස්ටයින් මාලිගය, ජර්මනිය" },
+            { image: "images/oracle/11.jpeg", text: "Piazza della Signoria, Florence, Italy\nපියාසා දැලා සිග්නෝරියා, ෆ්ලොරන්ස්, ඉතාලිය" },
+            { image: "images/oracle/12.jpeg", text: "Riga Old Town, Latvia\nරිගා පරණ නගරය, ලැට්වියාව" },
+            { image: "images/oracle/13.jpeg", text: "Sagrada Família, Barcelona, Spain\nසග්රාඩා ෆැමිලියා, බාර්සලෝනා, ස්පාඤ්ඤය" },
+            { image: "images/oracle/14.jpeg", text: "Schönbrunn Palace Gardens, Vienna, Austria\nෂෝන්බ්‍රන් මාලිගා උයන, වීයානා, ඕස්ට්‍රියාව" },
+            { image: "images/oracle/15.jpeg", text: "St. Mark's Square, Venice, Italy\nසෙන්ට් මාක්ස් චතුරශ්‍රය, වෙනීස්, ඉතාලිය" },
+            { image: "images/oracle/16.jpeg", text: "Swiss Alps Scenic Train Platform, Zermatt, Switzerland\nස්විස් ඇල්ප්ස් දුම්රිය ස්ටේශම, සර්මට්, ස්විට්සර්ලන්තය" },
+            { image: "images/oracle/17.jpeg", text: "Venice, Canal Bridge, Italy\nවෙනීස්, ඇළ පාලම, ඉතාලිය" },
+            { image: "images/oracle/18.jpeg", text: "Vienna Christmas market, Austria\nවීයානා නත්තල් වෙළඳපොළ, ඕස්ට්‍රියාව" }
+        ];
+
+        // DOM Elements
+        const giftWrap = document.getElementById('gift-wrap');
+        const oracleGlobe = document.getElementById('oracle-globe');
+        const globe = document.getElementById('globe');
+        const fortuneResults = document.getElementById('fortune-results');
+        const squareImageContainer = document.getElementById('square-image-container');
+        const squareImage = document.getElementById('square-image');
+        const fortuneCircle = document.getElementById('fortune-circle');
+        const currentFortuneImage = document.getElementById('current-fortune-image');
+        const currentFortuneText = document.getElementById('current-fortune-text');
+
+        // // Click to unwrap the gift
+        giftWrap.addEventListener('click', () => {
+            // Hide gift wrap
+            giftWrap.style.opacity = 0;
+            setTimeout(() => {
+                giftWrap.classList.add('hidden');
+                
+                // Show oracle globe
+                oracleGlobe.style.display = 'block';
+                setTimeout(() => {
+                    oracleGlobe.style.opacity = 1;
+                    
+                    // Make globe clickable after it's fully visible
+                    setTimeout(() => {
+                        globe.addEventListener('click', handleGlobeClick);
+                    }, 500);
+                }, 50);
+            }, 1000);
+        });
+
+        // Handle globe click
+        function handleGlobeClick() {
+            // Make globe glow
+            globe.src = "images/oracle/globe_glow.jpeg";
+            fortuneResults.innerHTML = "<p>The globe is swirling with mystical energy...</p>"; }
+
+// // Modify the gift unwrap handler
+// giftWrap.addEventListener('click', () => {
+//     giftWrap.style.opacity = 0;
+//     setTimeout(() => {
+//         giftWrap.classList.add('hidden');
+        
+//         // Show first globe
+//         document.getElementById('globe1').classList.remove('hidden');
+//         setTimeout(() => {
+//             document.getElementById('globe1').style.opacity = 1;
+            
+//             // After delay, show second globe
+//             setTimeout(() => {
+//                 document.getElementById('globe1').style.opacity = 0;
+//                 setTimeout(() => {
+//                     document.getElementById('globe1').classList.add('hidden');
+//                     document.getElementById('globe2').classList.remove('hidden');
+//                     setTimeout(() => {
+//                         document.getElementById('globe2').style.opacity = 1;
+                        
+//                         // Then proceed to fortunes
+//                         setTimeout(showFortunes, 2000);
+//                     }, 50);
+//                 }, 1000);
+//             }, 3000); // First globe shows for 3 seconds
+//         }, 50);
+//     }, 1000);
+// });
+
+            
+            // After delay, show square image
+            setTimeout(() => {
+                // Hide globe
+                oracleGlobe.style.opacity = 0;
+                setTimeout(() => {
+                    oracleGlobe.style.display = 'none';
+                    
+                    // Show square image (random from fortunes)
+                    const randomFortune = getRandomFortune();
+                    squareImage.src = randomFortune.image;
+                    squareImageContainer.style.display = 'block';
+                    setTimeout(() => {
+                        squareImageContainer.style.opacity = 1;
+                        
+                        // After delay, transition to fortune circle
+                        setTimeout(() => {
+                            squareImageContainer.style.opacity = 0;
+                            setTimeout(() => {
+                                squareImageContainer.style.display = 'none';
+                                startFortuneDisplay();
+                            }, 1000);
+                        }, 3000);
+                    }, 50);
+                }, 1000);
+            }, 2000);
+        
+
+        // Start displaying random fortunes
+        function startFortuneDisplay() {
+            fortuneCircle.style.display = 'flex';
+            setTimeout(() => {
+                fortuneCircle.style.opacity = 1;
+                displayRandomFortune();
+                
+                // Change fortune every 5 seconds
+                setInterval(displayRandomFortune, 5000);
+            }, 50);
+        }
+
+        // Display a random fortune
+        function displayRandomFortune() {
+            const fortune = getRandomFortune();
+            currentFortuneImage.src = fortune.image;
+            currentFortuneText.textContent = fortune.text;
+        }
+
+        // Helper function to get random fortune
+        function getRandomFortune() {
+            return oracleFortunes[Math.floor(Math.random() * oracleFortunes.length)];
+        }
+
+        -----------------------------
+
+        // DOM Elements
+const giftWrap = document.getElementById('gift-wrap');
+const globeScreen = document.getElementById('globe');
+const fortuneCircle = document.getElementById('fortune-circle');
+const currentFortuneImage = document.getElementById('current-fortune-image');
+const currentFortuneText = document.getElementById('current-fortune-text');
+
+// 1. Gift Unwrap Handler
+giftWrap.addEventListener('click', () => {
+    // Hide gift wrap
+    giftWrap.style.opacity = 0;
+    setTimeout(() => {
+        giftWrap.classList.add('hidden');
+        
+        // Show the glowing globe
+        globeScreen.classList.remove('hidden');
+        setTimeout(() => {
+            globeScreen.style.opacity = 1;
+            
+            // After delay, transition to fortune circle
+            setTimeout(() => {
+                globeScreen.style.opacity = 0;
+                setTimeout(() => {
+                    globeScreen.classList.add('hidden');
+                    startFortuneDisplay();
+                }, 1000);
+            }, 3000); // Globe shows for 3 seconds
+        }, 50);
+    }, 1000);
+});
+
+// 2. Fortune Display System
+function startFortuneDisplay() {
+    // Prepare the fortune circle with circular cropping
+    fortuneCircle.style.display = 'flex';
+    fortuneCircle.style.borderRadius = '50%';
+    fortuneCircle.style.overflow = 'hidden';
+    
+    // Style the fortune image for circular display
+    currentFortuneImage.style.width = '100%';
+    currentFortuneImage.style.height = '100%';
+    currentFortuneImage.style.objectFit = 'cover';
+    currentFortuneImage.style.borderRadius = '50%';
+    
+    // Fade in the fortune circle
+    setTimeout(() => {
+        fortuneCircle.style.opacity = 1;
+        displayRandomFortune();
+        
+        // Change fortune every 5 seconds
+        setInterval(displayRandomFortune, 9000);
+    }, 50);
+}
+
+function displayRandomFortune() {
+    const fortune = getRandomFortune();
+    currentFortuneImage.src = fortune.image;
+    currentFortuneText.textContent = fortune.text;
+    
+    // Add animation
+    currentFortuneImage.style.animation = 'none';
+    setTimeout(() => {
+        currentFortuneImage.style.animation = 'fadeIn 1s';
+    }, 10);
+}
+
+function getRandomFortune() {
+    return oracleFortunes[Math.floor(Math.random() * oracleFortunes.length)];
+}
+
+// Add this to your CSS:
+/*
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+*/
+
+// =+++++++++++++++++++++++++++++++
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Oracle</title>
+    <link rel="stylesheet" href="oracle.css">
+
+</head>
+<body>
+    <!-- Gift Wrapping Layer -->
+    <div id="gift-wrap"></div>
+
+<div id="globe" class="globe-screen hidden">
+    <img src="images/oracle/globe_glow.jpeg" alt="Second Globe" class="fullscreen-globe">
+</div>
+    
+    <!-- Square Image -->
+    <div id="square-image-container">
+        <img id="square-image" src="" alt="Revealed Image">
+    </div>
+    
+    <!-- Fortune Circle -->
+    <div id="fortune-circle">
+        <img class="fortune-image" id="current-fortune-image" src="" alt="Fortune Image">
+        <div id="current-fortune-text"></div>
+    </div>
+
+<script src="oracle.js"></script>
+</body>
+</html>
+
++++++++++++++++++++++++++++++
+
+        /* Gift Wrapping Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        
+        #gift-wrap {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #080808;
+            background-image: url('images/wrapping-paper.webp');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            transition: opacity 1s;
+        }
+        
+        /* #gift-wrap::before {
+            content: "Unwrap";
+            color: #1b0505;
+            font-size: 2em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        } */
+
+        /* Add these styles */
+.globe-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s;
+    z-index: 90;
+}
+
+.fullscreen-globe {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+}
+        
+        /* Oracle Globe Styles
+        #oracle-globe {
+            text-align: center;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+         */
+        #globe-container {
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+            position: relative;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(123, 31, 162, 0.6);
+        }
+        
+        #globe {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s;
+        }
+        
+        #fortune-results {
+            margin-top: 20px;
+            font-size: 1.2em;
+            min-height: 100px;
+            padding: 15px;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+        
+        /* Square Image Styles */
+        #square-image-container {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s;
+            z-index: 10;
+        }
+        
+        #square-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        /* Fortune Circle Styles */
+        /* #fortune-circle {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.9);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+            padding: 20px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 1s;
+        } */
+        
+        /* .fortune-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        } */
+        
+        .hidden {
+            display: none !important;
+        }
+
+
+        /* Add these to your oracle.css */
+#fortune-circle {
+    /* Update existing styles */
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.9) 100%);
+    border: 2px solid #5a2d81;
+    box-shadow: 0 0 30px rgba(123, 31, 162, 0.8), 
+                inset 0 0 20px rgba(123, 31, 162, 0.5);
+}
+
+.fortune-image {
+    /* Update existing styles */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+#current-fortune-text {
+    position: absolute;
+    bottom: 20px;
+    color: white;
+    background: rgba(0,0,0,0.7);
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 80%;
+    text-align: center;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to { 
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+#fortune-circle {
+    transition: opacity 1s ease;
+}
+
+.current-fortune-image {
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
++++++++++++++++++++++++++++++
+
+
+// oracle.js - Updated Version
+const oracleFortunes = [
+                { image: "images/oracle/1.jpeg", 
+                  text: "පැරීසියේ, ප්‍රංශයේ, කොබල්ස්ටෝන් මාවතේ සාප්පු සවාරි\nShopping in cobblestone streets, Paris, France\n" },
+            { image: "images/oracle/2.jpeg", 
+              text: "පැරීසියේ, ප්‍රංශයේ, කොබල්ස්ටෝන් මාවතේ සාප්පු සවාරි\nShopping in cobblestone streets, Paris, France\n" },
+            { image: "images/oracle/3.jpeg", 
+              text: "ඇම්ස්ටර්ඩෑම්, නෙදර්ලන්තය\nAmsterdam, Netherlands\n" },
+            { image: "images/oracle/4.jpeg", 
+              text: "කොලොසියම්, රෝමය, ඉතාලිය\nColosseum, Rome, Italy\n" },
+            { image: "images/oracle/5.jpeg", 
+              text: "ස්පාඤ්ඤයේ, බාර්සලෝනාහි, පාර්ක් ගුවෙල්\nPark Güell in Barcelona, Spain\n" },
+            { image: "images/oracle/6.jpeg", 
+              text: "චාල්ස් පාලම, ප්‍රාග්, චෙක් ජනරජය\nCharles Bridge, Prague, Czech Republic\n" },
+            { image: "images/oracle/7.jpeg", 
+              text: "අයිෆල් කුළුණ, පැරීසියේ, ප්‍රංශය\nEiffel Tower Lawn, Paris, France\n" },
+            { image: "images/oracle/8.jpeg", 
+              text: "අයිෆල් කුළුණ, පැරීසියේ, ප්‍රංශය\nEiffel Tower Lawn, Paris, France\n" },
+            { image: "images/oracle/9.jpeg", 
+              text: "වියා රිකසොලි, ෆ්ලොරන්ස්, ඉතාලිය\nVia Ricasoli, Florence, Italy\n" },
+            { image: "images/oracle/10.jpeg", 
+              text: "නොයිශ්වාන්ස්ටයින් මාලිගය, ජර්මනිය\nNeuschwanstein Castle, Germany\n" },
+            { image: "images/oracle/11.jpeg", 
+              text: "පියාසා දැලා සිග්නෝරියා, ෆ්ලොරන්ස්, ඉතාලිය\nPiazza della Signoria, Florence, Italy\n" },
+            { image: "images/oracle/12.jpeg", 
+              text: "රිගා පරණ නගරය, ලැට්වියාව\nRiga Old Town, Latvia\n" },
+            { image: "images/oracle/13.jpeg", 
+              text: "සග්රාඩා ෆැමිලියා, බාර්සලෝනා, ස්පාඤ්ඤය\nSagrada Família, Barcelona, Spain\n" },
+            { image: "images/oracle/14.jpeg", 
+              text: "ෂෝන්බ්‍රන් මාලිගා උයන, වීයානා, ඕස්ට්‍රියාව\nSchönbrunn Palace Gardens, Vienna, Austria\n" },
+            { image: "images/oracle/15.jpeg", 
+              text: "සෙන්ට් මාක්ස් චතුරශ්‍රය, වෙනීස්, ඉතාලිය\nSt. Mark's Square, Venice, Italy\n" },
+            { image: "images/oracle/16.jpeg", 
+              text: "ස්විස් ඇල්ප්ස් දුම්රිය ස්ටේශම, සර්මට්, ස්විට්සර්ලන්තය \nSwiss Alps Scenic Train Platform, Zermatt, Switzerland\n" },
+            { image: "images/oracle/17.jpeg", 
+              text: "වෙනීස්, ඇළ පාලම, ඉතාලිය \n Venice, Canal Bridge, Italy" },
+            { image: "images/oracle/18.jpeg", 
+              text: "වීයානා නත්තල් වෙළඳපොළ \nඕස්ට්‍රියාව Vienna Christmas market, Austria" }
+];
+
+
+// DOM Elements
+const giftWrap = document.getElementById('gift-wrap');
+const globeScreen = document.getElementById('globe');
+const fortuneCircle = document.getElementById('fortune-circle');
+const currentFortuneImage = document.getElementById('current-fortune-image');
+const currentFortuneText = document.getElementById('current-fortune-text');
+
+// State management
+let usedFortunes = [];
+let fortuneInterval;
+
+// 1. Clean Gift Unwrap Sequence
+giftWrap.addEventListener('click', () => {
+    // Reset any previous state
+    resetAllElements();
+    
+    // Start unwrap animation
+    giftWrap.style.opacity = 0;
+    
+    setTimeout(() => {
+        giftWrap.classList.add('hidden');
+        showGlobeScreen();
+    }, 1000);
+});
+
+function resetAllElements() {
+    // Clear any ongoing animations
+    clearInterval(fortuneInterval);
+    usedFortunes = [];
+    
+    // Reset element states
+    giftWrap.style.opacity = 1;
+    giftWrap.classList.remove('hidden');
+    
+    globeScreen.style.opacity = 0;
+    globeScreen.classList.add('hidden');
+    
+    fortuneCircle.style.opacity = 0;
+    fortuneCircle.classList.add('hidden');
+}
+
+function showGlobeScreen() {
+    globeScreen.classList.remove('hidden');
+    setTimeout(() => {
+        globeScreen.style.opacity = 1;
+        
+        // After 3 seconds, move to fortunes
+        setTimeout(() => {
+            globeScreen.style.opacity = 0;
+            setTimeout(() => {
+                globeScreen.classList.add('hidden');
+                prepareFortuneDisplay();
+            }, 1000);
+        }, 3000);
+    }, 50);
+}
+
+// 2. Improved Fortune System
+function prepareFortuneDisplay() {
+    // Select 3-5 unique random fortunes
+    const fortuneCount = 3 + Math.floor(Math.random() * 3); // 3-5 fortunes
+    usedFortunes = [];
+    
+    while (usedFortunes.length < fortuneCount) {
+        const randomIndex = Math.floor(Math.random() * oracleFortunes.length);
+        if (!usedFortunes.includes(randomIndex)) {
+            usedFortunes.push(randomIndex);
+        }
+    }
+    
+    // Style the fortune circle
+    fortuneCircle.style.display = 'flex';
+    fortuneCircle.style.borderRadius = '50%';
+    fortuneCircle.style.overflow = 'hidden';
+    
+    currentFortuneImage.style.width = '100%';
+    currentFortuneImage.style.height = '100%';
+    currentFortuneImage.style.objectFit = 'cover';
+    currentFortuneImage.style.borderRadius = '50%';
+    
+    // Show first fortune
+    setTimeout(() => {
+        fortuneCircle.style.opacity = 1;
+        showNextFortune(0);
+    }, 50);
+}
+
+function showNextFortune(index) {
+    if (index >= usedFortunes.length) {
+        // All fortunes shown - you could loop or end here
+        return;
+    }
+    
+    const fortune = oracleFortunes[usedFortunes[index]];
+    currentFortuneImage.style.opacity = 0;
+    currentFortuneImage.src = fortune.image;
+    currentFortuneText.textContent = fortune.text;
+    
+    // Smooth fade in
+    setTimeout(() => {
+        currentFortuneImage.style.opacity = 1;
+        currentFortuneImage.style.animation = 'fadeIn 1s';
+        
+        // Schedule next fortune (or end)
+        fortuneInterval = setTimeout(() => {
+            showNextFortune(index + 1);
+        }, 5000); // Show each for 5 seconds
+    }, 10);
+}
