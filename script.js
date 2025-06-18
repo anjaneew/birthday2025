@@ -141,6 +141,12 @@ function handleDragStart(e) {
     }
 }
 
+function handleTouchStart(e) {
+    if (e.target.tagName === 'IMG') {
+        dragSrc = e.target;
+    }
+}
+
 function handleDrop(e) {
     e.preventDefault();
     e.stopPropagation();
@@ -162,6 +168,24 @@ function handleDrop(e) {
     return false;
 }
 
+function handleTouchEnd(e) {
+    const touch = e.changedTouches[0];
+    const target = document.elementFromPoint(touch.clientX, touch.clientY);
+    if (dragSrc && target && target.tagName === 'IMG' && dragSrc !== target) {
+        const tempSrc = dragSrc.src;
+        const tempCurrent = dragSrc.dataset.current;
+
+        dragSrc.src = target.src;
+        dragSrc.dataset.current = target.dataset.current;
+
+        target.src = tempSrc;
+        target.dataset.current = tempCurrent;
+
+        checkCompletion();
+    }
+    dragSrc = null;
+}
+
 function handleDragOver(e) {
     e.preventDefault();
     e.dataTransfer.dropEffect = 'move';
@@ -176,6 +200,9 @@ function addDnDHandlers() {
         piece.addEventListener('dragover', handleDragOver, false);
         piece.addEventListener('drop', handleDrop, false);
         piece.addEventListener('dragend', () => dragSrc = null, false);
+        piece.addEventListener('touchstart', handleTouchStart, false);
+        piece.addEventListener('touchend', handleTouchEnd, false);
+
     });
 }
 
