@@ -100,6 +100,10 @@ function shuffle(array) {
     return newArray;
 }
 
+document.addEventListener('touchmove', function(e) {
+  e.preventDefault();
+}, { passive: false });
+
 function loadPuzzle(index) {
     puzzleContainer.innerHTML = '';
     completeOverlay.classList.add('hidden');
